@@ -6,7 +6,7 @@ const useGetData = () => {
     const [message, setMessage] = useState('')
     const fetchData = async() => {
        try {
-        const data = await instance.get('/api/v1')
+        const data = await instance.get('/')
             setMessage(data.data.mssg)
        } catch (error) {
         console.error(error)

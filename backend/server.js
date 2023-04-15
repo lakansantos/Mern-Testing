@@ -1,7 +1,7 @@
 const express = require('express')
-const cors = require('cors')
-
 const app = express()
+const cors = require('cors');
+const router = require('./routes/testroutes');
 app.use(cors())
 
 
@@ -9,20 +9,11 @@ require('dotenv').config();
 
 const PORT = process.env.PORT
 
+app.use('/api/v1', router);
 
-app.get('/',  cors(), (req, res) => {
-
-    // res.json({mssg: 'yehey'})
-    console.log('Yehey you ran it!!')
-})
-
-
-app.get('/api/v1', cors(),(req, res) => {
-    res.json({mssg: 'yehey'})
-    console.log('Yehey you ran it!!')
-})
-
-
+app.use(cors({
+    origin: 'http://localhost:4000'
+}))
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`)
