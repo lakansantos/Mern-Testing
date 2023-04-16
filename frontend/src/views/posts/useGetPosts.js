@@ -6,7 +6,6 @@ const useGetPosts = () => {
     const getPosts = async () => {
         const response = await instance.get('/posts')
         setData(response.data.posts)
-        console.log(response.data.posts)
     }
 
     useEffect(() => {

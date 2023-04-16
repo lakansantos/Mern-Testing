@@ -11,7 +11,7 @@ router.get('/',  (req, res) => {
 router.get('/posts' , (req, res) => {
   res.json({
     "posts" : [
-      {
+      { 
         "postId"  : 1,
         "title" : "Hello This is my first post",
         "message" : "test"
@@ -22,6 +22,13 @@ router.get('/posts' , (req, res) => {
         "message" : "test"
       }
     ]
+  })
+})
+
+
+router.get('/posts/:id', (req, res) => {
+  res.json({
+    mssg: "get a single post"
   })
 })
 

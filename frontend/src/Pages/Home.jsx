@@ -7,7 +7,6 @@ const Home = () => {
     // const data = useContext(DataContext)
     const {message} = useGetData();
     const {data} = useGetPosts();
-    console.log(data)
 
     return (
     <div>
