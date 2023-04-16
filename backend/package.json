@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "proxy": "http://localhost:4000",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "dev": "nodemon server",
-    "proxy": "http://localhost:4000"
+    "dev": "nodemon server"
   },
   "keywords": [],
   "author": "Lakan Santos",
