@@ -32,6 +32,25 @@ router.get('/posts/:id', (req, res) => {
   })
 })
 
+router.post('/posts/:id', (req, res) => {
+  res.json({
+    mssg: "post a single post"
+  })
+})
+
+router.put('/posts/:id', (req, res) => {
+  res.json({
+    mssg: "edited a single post"
+  })
+})
+
+router.delete('/posts/:id', (req, res) => {
+  res.json({
+    mssg: "deleted a single post"
+  })
+})
+
+
 
 
 
