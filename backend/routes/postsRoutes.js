@@ -25,7 +25,7 @@ router.get('/posts/:id', async(req, res) => {
     const singlePost = await Post.findById(id)
     if(!singlePost) {
       res.status(404).json({
-        mssg: 'No post found'
+        mssg: 'No posts found'
       }) 
     } else {
       res.status(200).json(singlePost)
