@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { instance } from "../../api/axios";
+import { getPosts } from "../../api/post";
 
 const useGetPosts = () => {
     const [data, setData] = useState([])
     const [isLoading, setIsloading] = useState(false)
-    const getPosts = async () => {
+
+    const getData = async () => {
         try {
             setIsloading(true)
-            const response = await instance.get('/posts')
-            setData(response.data)
+            const response = await getPosts()
+            setData(response)
             setIsloading(false)
         } catch (error) {
             console.error('error')
@@ -16,10 +17,14 @@ const useGetPosts = () => {
     }
 
     useEffect(() => {
-        getPosts()
+        getData()
     }, [])
 
-    return {data, isLoading}
+    return {
+        data, 
+        isLoading, 
+        reload: getData,
+    }
 }
 
 export default useGetPosts;

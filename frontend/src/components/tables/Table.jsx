@@ -26,7 +26,7 @@ const PagesTable = ({data, isLoading}) => {
                 data.map((post, index) => {
                     return (
                         <tr key={post._id}>
-                            <td>{index}</td>
+                            <td>{index + 1}</td>
                             <td>{post.title}</td>
                             <td>{post.message}</td>
                             <td>Edit delete</td>
