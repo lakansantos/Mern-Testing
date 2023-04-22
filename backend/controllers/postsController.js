@@ -56,16 +56,19 @@ const addPost = async (req, res) => {
 const editPost = async (req, res) => {
     const { title, message } = req.body
     try {
-
         const editedPost = await Post.findByIdAndUpdate(
             req.params.id, 
             { title, message},
             { new: true }    
         )
 
-        res.status(200).json(editedPost)
+        if(!editedPost) {
+            res.status(404).json({mssg: 'Post not found'})
+        } else {
+            res.status(200).json({mssg: 'Successfully edited the post'})
+        }
     } catch (error) {
-        res.status(400).json({mssg: "Error, can't edit the post"})
+        res.status(400).json({mssg: "Something went wrong"})
     }
 }
 
@@ -73,15 +76,20 @@ const editPost = async (req, res) => {
 //delete post
 const deletePost = async (req, res) => {
     try {
-
-        const editedPost = await Post.findByIdAndDelete(
+        const deletePost = await Post.findByIdAndDelete(
             req.params.id, 
             { new: true }    
         )
 
-        res.status(200).json(editedPost)
+        if(!deletePost) {
+            res.status(404).json({mssg: 'Post not found'})
+        } else {
+            res.status(200).json({mssg: 'Successfully deleted a post'})
+        }
+
+       
     } catch (error) {
-        res.status(400).json({mssg: "Error, can't edit the post"})
+        res.status(400).json({mssg: "Sometging went wrong!"})
     }
 }
 
