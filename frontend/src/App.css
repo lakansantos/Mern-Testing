@@ -4,5 +4,20 @@
   box-sizing: border-box;
 }
 .App{
-  background-color: #333;
+  background-color: rgb(255, 252, 252);
 }
+
+.table {
+  border-collapse: collapse;
+}
+
+
+nav ul li {
+  list-style-type: none;
+  
+}
+
+nav ul li a {
+  color:  white;
+}
+

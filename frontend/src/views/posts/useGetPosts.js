@@ -3,16 +3,23 @@ import { instance } from "../../api/axios";
 
 const useGetPosts = () => {
     const [data, setData] = useState([])
+    const [isLoading, setIsloading] = useState(false)
     const getPosts = async () => {
-        const response = await instance.get('/posts')
-        setData(response.data.posts)
+        try {
+            setIsloading(true)
+            const response = await instance.get('/posts')
+            setData(response.data)
+            setIsloading(false)
+        } catch (error) {
+            console.error('error')
+        }
     }
 
     useEffect(() => {
         getPosts()
     }, [])
 
-    return {data}
+    return {data, isLoading}
 }
 
 export default useGetPosts;
