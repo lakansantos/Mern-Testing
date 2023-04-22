@@ -23,7 +23,7 @@ const Home = () => {
             <PostAddModal 
                 onClose={onClose}
                 showAddModal={showAddModal}
-                onAdd={onAdd}
+                onSubmit={onAdd}
             />
             <PagesTable 
                 data={data}
