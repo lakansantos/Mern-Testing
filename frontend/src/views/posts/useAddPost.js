@@ -5,13 +5,10 @@ import { addPost as createPost } from "../../api/post";
 const useAddPost = (callback) => {
     const [showAddModal, setShowAddModal] = useState(false)
     const onClose = () => setShowAddModal(!showAddModal)
-    const [title, setTitle] = useState('')
-    const [message, setMessage] = useState('')
 
-    const addPost = async () => {
+    const addPost = async (data) => {
         try {
-            
-            await createPost({title, message})
+            await createPost(data)
             setShowAddModal(false)
 
             if(callback) callback();
@@ -19,12 +16,6 @@ const useAddPost = (callback) => {
             console.error('error')
         }
     }
-
-    useEffect(() => {
-        if(title, message){
-            addPost()
-        }
-    }, [title, message])
 
     return {
         showAddModal, 
