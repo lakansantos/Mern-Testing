@@ -1,67 +1,35 @@
 const express = require('express')
 const router = express.Router();
-const Post = require('../models/postsModel')
+
+const {
+  getAllPosts,
+  getSinglePost,
+  addPost,
+  editPost,
+  deletePost
+} = require('../controllers/postsController')
 
 router.get('/',  (req, res) => {
     console.log('Yehey you ran it!!');
     res.json({mssg: 'Yehey!'});
 });
 
+//route for getting all posts
+router.get('/posts' , getAllPosts)
 
-router.get('/posts' , async(req, res) => {
-  const posts = await Post.find()
-  try {
-    res.status(200).json(posts)
-  } catch (error) {
-    res.status(400).json({mssg: error})
-  }
-})
+//route for getting single post
+router.get('/posts/:id', getSinglePost) 
 
 
-router.get('/posts/:id', async(req, res) => {
-  const {id} = req.params
-
-  try {
-    const singlePost = await Post.findById(id)
-    if(!singlePost) {
-      res.status(404).json({
-        mssg: 'No posts found'
-      }) 
-    } else {
-      res.status(200).json(singlePost)
-    }
-  } catch (error) {
-    res.status(400).json({mssg: error.message})
-  }
-})
-
-router.post('/posts', async(req, res) => {
-  const {title, message} = req.body;  
-  try {
-    const post = await Post.create({title, message})
-    res.status(200).json(post)
-  } catch (error) {
-    res.status(500).json({error: error.message})
-  }
-})
-// router.post('/posts', (req, res) => {
-//   res.json({
-//     mssg: "test"
-//   })
-// })
+//route for adding post
+router.post('/posts', addPost) 
 
 
-router.put('/posts/:id', (req, res) => {
-  res.json({
-    mssg: "edited a single post"
-  })
-})
+//route for editing a single post
+router.put('/posts/:id', editPost)
 
-router.delete('/posts/:id', (req, res) => {
-  res.json({
-    mssg: "deleted a single post"
-  })
-})
+
+router.delete('/posts/:id', deletePost)
 
 
 
