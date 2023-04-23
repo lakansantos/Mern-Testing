@@ -43,3 +43,22 @@ header {
   justify-content: end;
   margin: 20px 5px;
 }
+
+
+.tr-heading {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.action-icon-container {
+  display: flex;
+  gap: 10px;
+}
+
+
+
+.action-icon-container button {
+  border: none;
+  font-size: 20px;
+  background: none;
+}

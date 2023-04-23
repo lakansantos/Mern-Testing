@@ -1,13 +1,11 @@
 import { Table } from "reactstrap";
-
-const PagesTable = ({data, isLoading}) => {
+import { AiOutlineEdit } from 'react-icons/ai'
+import { MdDeleteOutline } from 'react-icons/md'
+const PagesTable = ({data, handleDeleteToggle, isLoading}) => {
     return (
-        <Table 
-            hover
-            striped
-        >
+        <Table hover striped >
             <thead>
-                <tr>
+                <tr className="tr-heading">
                     <th>#</th>
                     <th>Title</th>
                     <th>Message</th>
@@ -29,7 +27,16 @@ const PagesTable = ({data, isLoading}) => {
                             <td>{index + 1}</td>
                             <td>{post.title}</td>
                             <td>{post.message}</td>
-                            <td>Edit delete</td>
+                            <td>
+                                <div className="action-icon-container">
+                                    <button>
+                                        <AiOutlineEdit />
+                                    </button>
+                                    <button onClick={() => handleDeleteToggle(post._id)}>
+                                        <MdDeleteOutline />
+                                    </button>         
+                                </div>
+                            </td>
                         </tr>
                     )
                 })
