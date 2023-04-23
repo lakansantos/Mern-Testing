@@ -1,7 +1,10 @@
 import { Table } from "reactstrap";
 import { AiOutlineEdit } from 'react-icons/ai'
 import { MdDeleteOutline } from 'react-icons/md'
+import { Link, useLocation } from "react-router-dom";
+
 const PagesTable = ({data, handleDeleteToggle, isLoading}) => {
+    const location = useLocation()
     return (
         <Table hover striped >
             <thead>
@@ -32,9 +35,11 @@ const PagesTable = ({data, handleDeleteToggle, isLoading}) => {
                                     <button>
                                         <AiOutlineEdit />
                                     </button>
-                                    <button onClick={() => handleDeleteToggle(post._id)}>
-                                        <MdDeleteOutline />
-                                    </button>         
+                                    <Link to={`/delete/post/${post._id}`} state={{background: location}}>
+                                        <button onClick={() => handleDeleteToggle(post._id)}>
+                                            <MdDeleteOutline />
+                                        </button>    
+                                    </Link>       
                                 </div>
                             </td>
                         </tr>

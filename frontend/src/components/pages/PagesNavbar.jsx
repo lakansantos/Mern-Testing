@@ -2,7 +2,7 @@ const PagesNavbar = () => {
     return (
         <nav className="bg-primary">
         <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="/views/home">Home</a></li>
         </ul>
     </nav>
     )

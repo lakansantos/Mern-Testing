@@ -10,7 +10,7 @@ const PostDeleteModal = ({onClose, dataToDelete, isOpen, onSubmit}) => {
 
     const {title, message} = dataToDelete || {}
     return (
-        <Modal isOpen={isOpen} toggle={onClose}>
+        <Modal isOpen={isOpen} toggle={onClose} centered>
             <ModalHeader>
                 Do you want to delete this post?
             </ModalHeader>
@@ -19,7 +19,7 @@ const PostDeleteModal = ({onClose, dataToDelete, isOpen, onSubmit}) => {
                 <p>Message: {message}</p>
                 <ModalFooter>
                     <Button onClick={onClose}>Cancel</Button>
-                    <Button type="submit" onClick={onSubmit}>
+                    <Button color="danger" type="submit" onClick={onSubmit}>
                         Delete
                     </Button>
                 </ModalFooter>

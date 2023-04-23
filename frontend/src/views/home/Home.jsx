@@ -5,9 +5,10 @@ import PostAddModal from "../posts/PostAddModal";
 import { Button } from "reactstrap";
 import useDeletePost from "../posts/useDeletePost";
 import PostDeleteModal from "../posts/PostDeleteModal";
-
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 const Home = () => {
-
+    const location = useLocation()
     const {data, isLoading, reload} = useGetPosts();
     const {
         showAddModal,
@@ -25,9 +26,14 @@ const Home = () => {
     } = useDeletePost(reload)
     return (
         <div className="home-page">
-
             <header>
-                <Button color="primary" onClick={() => setShowAddModal(true)}>Add Post</Button>
+                <Link to="/create/post" state={{background: location}}>
+                    <Button 
+                        color="primary" onClick={() => setShowAddModal(true)}
+                    >
+                        Add Post
+                    </Button>
+                </Link>
             </header>
             
             <PostAddModal 
