@@ -14,8 +14,6 @@ const useDeletePost = (callback) => {
         const response = await getPost(postId);
         setId(postId);
         setDataToDelete(response)
-        console.log(response)
-
     }
     const deleteData = async () => {
         try {
