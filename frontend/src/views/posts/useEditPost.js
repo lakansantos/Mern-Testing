@@ -1,13 +1,19 @@
 import {useState} from "react";
 import {editPost, getPost} from "../../api/post";
 import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+
 const useEditPost = (callback) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [id, setId] = useState("");
-  const toggleEdit = () => setShowEditModal(!showEditModal);
+
   const [dataToEdit, setDataToEdit] = useState({});
   const [data, setData] = useState([]);
-
+  const navigate = useNavigate();
+  const toggleEdit = () => {
+    setShowEditModal(!showEditModal);
+    navigate(-1);
+  };
   const [isLoading, setIsLoading] = useState(false);
 
   const handleEditToggle = async (postId) => {
@@ -18,7 +24,6 @@ const useEditPost = (callback) => {
   const getData = async () => {
     setIsLoading(true);
     const response = await getPost(id);
-    console.log(response);
     setDataToEdit(response);
     setIsLoading(false);
   };
@@ -28,6 +33,7 @@ const useEditPost = (callback) => {
       await editPost(id, data);
       setShowEditModal(false);
       setData(data);
+      navigate(-1);
       if (callback) callback();
     } catch (error) {
       console.error(error);

@@ -8,12 +8,13 @@ const useAddPost = (callback) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const onClose = () => {
     setShowAddModal(!showAddModal);
+    navigate(-1);
   };
 
   const addPost = async (data) => {
     try {
       await createPost(data);
-      setShowAddModal(false);
+      onClose();
 
       if (callback) callback();
     } catch (error) {

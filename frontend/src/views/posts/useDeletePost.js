@@ -1,10 +1,16 @@
 import {useState} from "react";
 import {deletePost, getPost} from "../../api/post";
+import {useNavigate} from "react-router-dom";
 
 const useDeletePost = (callback) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [id, setId] = useState("");
-  const toggleDelete = () => setShowDeleteModal(!showDeleteModal);
+
+  const navigate = useNavigate();
+  const toggleDelete = () => {
+    setShowDeleteModal(!showDeleteModal);
+    navigate(-1);
+  };
   const [dataToDelete, setDataToDelete] = useState("");
 
   const handleDeleteToggle = async (postId) => {
@@ -16,7 +22,7 @@ const useDeletePost = (callback) => {
   const deleteData = async () => {
     try {
       const response = await deletePost(id);
-      setShowDeleteModal(false);
+      toggleDelete();
 
       if (callback) callback();
     } catch (error) {

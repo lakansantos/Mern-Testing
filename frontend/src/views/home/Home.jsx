@@ -9,6 +9,7 @@ import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import useEditPost from "../posts/useEditPost";
 import PostEditModal from "../posts/PostEditModal";
+import {useEffect} from "react";
 
 const Home = () => {
   const location = useLocation();
