@@ -49,7 +49,7 @@ const addPost = async (req, res) => {
 };
 
 //edit post
-console.log("test");
+
 const editPost = async (req, res) => {
   const { title, message } = req.body;
   try {
