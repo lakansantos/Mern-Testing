@@ -2,35 +2,37 @@ const User = require("../models/usersModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const registerUser = (req, res, next) => {
-  bcrypt.hash(req.body.password, 10, function (err, hashedPassword) {
-    if (err) {
-      res.json({
-        error: err,
+const registerUser = async (req, res, next) => {
+  try {
+    const { firstName, lastName, email, userName, password } = req.body;
+
+    const existingUserName = await User.findOne({ userName });
+    const existingEmail = await User.findOne({ email });
+
+    if (existingUserName || existingEmail) {
+      return res.status(400).json({
+        message: "User already exists",
       });
     }
 
-    let user = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      userName: req.body.userName,
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      firstName,
+      lastName,
+      email,
+      userName,
       password: hashedPassword,
     });
 
-    user
-      .save()
-      .then((user) => {
-        res.json({
-          message: user,
-        });
-      })
-      .catch((err) => {
-        res.json({
-          message: err,
-        });
-      });
-  });
+    await newUser.save();
+
+    res
+      .status(201)
+      .json({ message: "User created successfully", user: newUser });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to create user" });
+  }
 };
 
 module.exports = {
