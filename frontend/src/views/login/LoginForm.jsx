@@ -15,7 +15,7 @@ const LoginForm = () => {
         <Input name="password" placeholder="password" type="password" />
         <Label>Password</Label>
       </FormContainer>
-      <FormContainer>
+      <div>
         <p>
           Don't have an account?{" "}
           <span>
@@ -29,7 +29,7 @@ const LoginForm = () => {
             </Link>
           </span>
         </p>
-      </FormContainer>
+      </div>
       <FormContainer>
         <Button color="primary">Submit</Button>
       </FormContainer>
