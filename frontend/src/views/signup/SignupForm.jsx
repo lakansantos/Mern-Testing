@@ -1,12 +1,23 @@
 import {Form, FormGroup, Input, Label, Button} from "reactstrap";
 import FormContainer from "../../components/forms/FormContainer";
-import {Link} from "react-router-dom";
-const LoginForm = () => {
+const SignupForm = () => {
   return (
     <Form className="form">
       <FormGroup>
-        <h1>Login</h1>
+        <h1>Sign up</h1>
       </FormGroup>
+      <FormContainer>
+        <Input name="first-name" placeholder="First Name" type="text" />
+        <Label>First Name</Label>
+      </FormContainer>
+      <FormContainer>
+        <Input name="last-name" placeholder="Last Name" type="text" />
+        <Label>Last Name</Label>
+      </FormContainer>
+      <FormContainer>
+        <Input name="email" placeholder="email" type="email" />
+        <Label>Email</Label>
+      </FormContainer>
       <FormContainer>
         <Input name="username" placeholder="Username" type="text" />
         <Label>Username</Label>
@@ -16,25 +27,10 @@ const LoginForm = () => {
         <Label>Password</Label>
       </FormContainer>
       <FormContainer>
-        <p>
-          Don't have an account?{" "}
-          <span>
-            <Link
-              to={"/signup"}
-              style={{
-                color: "black",
-              }}
-            >
-              Create an account
-            </Link>
-          </span>
-        </p>
-      </FormContainer>
-      <FormContainer>
         <Button color="primary">Submit</Button>
       </FormContainer>
     </Form>
   );
 };
 
-export default LoginForm;
+export default SignupForm;

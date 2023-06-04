@@ -66,13 +66,12 @@ header {
   height: 95vh;
 }
 
-.login-form {
-  max-height: 50%;
+.form {
+  max-height: fit-content;
   height: fit-content;
   display: flex;
   background-color: white;
   flex-direction: column;
-  justify-content: start;
   width: 470px;
   padding: 20px;
   gap: 15px;

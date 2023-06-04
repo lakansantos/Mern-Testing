@@ -2,7 +2,7 @@ import {MODAL_ROUTE_PATH} from "../configs/constants";
 import {PostAddModal, PostDeleteModal, Home} from "../views";
 import PostEditModal from "../views/posts/PostEditModal";
 import Login from "../views/login";
-
+import SignUp from "../views/signup";
 const ROUTE_MODAL_COMPONENT = [
   {
     path: MODAL_ROUTE_PATH.create_user,
@@ -26,6 +26,10 @@ const ROUTE_INDEX_COMPONENT = [
   {
     path: "/login",
     component: <Login />,
+  },
+  {
+    path: "/signup",
+    component: <SignUp />,
   },
 ];
 
