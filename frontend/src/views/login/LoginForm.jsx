@@ -8,11 +8,16 @@ const LoginForm = () => {
         <h1>Login</h1>
       </FormGroup>
       <FormContainer>
-        <Input name="username" placeholder="Username" type="text" />
+        <Input name="username" placeholder="Username" type="text" required />
         <Label>Username</Label>
       </FormContainer>
       <FormContainer>
-        <Input name="password" placeholder="password" type="password" />
+        <Input
+          name="password"
+          placeholder="password"
+          type="password"
+          required
+        />
         <Label>Password</Label>
       </FormContainer>
       <div>

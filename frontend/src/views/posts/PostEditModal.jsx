@@ -54,7 +54,7 @@ const PostEditModal = (props) => {
           </FormGroup>
           <ModalFooter>
             <Button onClick={onClose}>Cancel</Button>
-            <Button color="primary" type="submit">
+            <Button type="submit" color="primary">
               Submit
             </Button>
           </ModalFooter>
