@@ -4,7 +4,7 @@ import {AUTH_COOKIE_NAME} from "../configs/constants";
 import cookies from "./cookies";
 export const instance = axios.create({
   baseURL: API_URL,
-  withCredentials: true,
+
   mode: "no-cors",
   headers: {
     "Access-Control-Allow-Origin": "*",

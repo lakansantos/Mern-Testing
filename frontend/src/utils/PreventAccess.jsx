@@ -4,7 +4,7 @@ const PreventLogin = ({children}) => {
   const {isAuth} = useAuthContext();
 
   if (isAuth) {
-    return <Navigate to="views/home" />;
+    return <Navigate to="/views/home" />;
   }
 
   return <>{children}</>;

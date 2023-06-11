@@ -21,6 +21,7 @@ const AuthProvider = ({children}) => {
       setAuth(true);
     }
   }, []);
+
   return (
     <AuthContext.Provider
       value={{
