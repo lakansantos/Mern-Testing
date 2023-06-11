@@ -2,9 +2,12 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config/environment");
 
 const verifyToken = async (req, res, next) => {
-  if (req.headers.authorization) {
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
     const token = req.headers.authorization.split(" ")[1];
-    console.log(token);
+
     try {
       jwt.verify(token, JWT_SECRET);
       next();
