@@ -35,6 +35,17 @@ const registerUser = async (req, res, next) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  const Users = await User.find().sort({ createdAt: "desc" });
+
+  try {
+    res.status(200).json(Users);
+  } catch (error) {
+    res.status(400).json({ mssg: "Something went wrong" });
+  }
+};
+
 module.exports = {
   registerUser,
+  getUsers,
 };
