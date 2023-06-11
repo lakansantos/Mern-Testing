@@ -1,10 +1,15 @@
 const Post = require("../models/postsModel");
-
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../config/environment");
 //get all posts
 
 const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find().sort({ createdAt: "desc" });
+    const userId = req.userId;
+    const posts = await Post.find({ userId: userId }).sort({
+      createdAt: "desc",
+    });
+
     res.status(200).json(posts);
   } catch (error) {
     res.status(400).json({ mssg: error });
@@ -34,8 +39,10 @@ const getSinglePost = async (req, res) => {
 
 const addPost = async (req, res) => {
   const { title, message } = req.body;
+
   try {
-    const post = await Post.create({ title, message });
+    const post = await Post.create({ title, message, userId: req.userId });
+    console.log(req.userId);
     if (!post) {
       res.status(400).json({
         mssg: "No post found!",

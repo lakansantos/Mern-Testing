@@ -23,7 +23,7 @@ const login = async (req, res) => {
 
     res.status(200).json({
       _id: user.id,
-      token: convertToToken({ id: user._id, userName: user.userName }),
+      token: convertToToken({ id: user._id }),
     });
   } catch (error) {
     res.status(500).json({ message: "Server does not respond" });

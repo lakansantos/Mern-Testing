@@ -8,24 +8,24 @@ const {
   editPost,
   deletePost,
 } = require("../controllers/postsController");
-const { verifyToken } = require("../middlewares/authMiddleWare");
+const { authenticateToken } = require("../middlewares/authMiddleWare");
 
 router.get("/", (req, res) => {
   res.json({ mssg: "Yehey!" });
 });
 
 //route for getting all posts
-router.get("/posts", verifyToken, getAllPosts);
+router.get("/posts", authenticateToken, getAllPosts);
 
 //route for getting single post
-router.get("/posts/:id", verifyToken, getSinglePost);
+router.get("/posts/:id", authenticateToken, getSinglePost);
 
 //route for adding post
-router.post("/posts", verifyToken, addPost);
+router.post("/posts", authenticateToken, addPost);
 
 //route for editing a single post
-router.put("/posts/:id", verifyToken, editPost);
+router.put("/posts/:id", authenticateToken, editPost);
 
-router.delete("/posts/:id", verifyToken, deletePost);
+router.delete("/posts/:id", authenticateToken, deletePost);
 
 module.exports = router;

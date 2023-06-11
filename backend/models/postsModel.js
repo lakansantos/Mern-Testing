@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const usersModel = require("./usersModel");
-
+const User = require("./usersModel");
 const postSchema = new mongoose.Schema(
   {
     title: {
@@ -11,6 +10,11 @@ const postSchema = new mongoose.Schema(
     message: {
       type: String,
       required: true,
+    },
+
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: User,
     },
   },
   { timestamps: true }
