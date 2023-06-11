@@ -3,6 +3,8 @@ import {PostAddModal, PostDeleteModal, Home} from "../views";
 import PostEditModal from "../views/posts/PostEditModal";
 import Login from "../views/login";
 import SignUp from "../views/signup";
+import Auth from "../utils/Auth";
+import PreventLogin from "../utils/PreventAccess";
 const ROUTE_MODAL_COMPONENT = [
   {
     path: MODAL_ROUTE_PATH.create_user,
@@ -21,7 +23,11 @@ const ROUTE_MODAL_COMPONENT = [
 const ROUTE_INDEX_COMPONENT = [
   {
     path: "/views/home",
-    component: <Home />,
+    component: (
+      <Auth>
+        <Home />
+      </Auth>
+    ),
   },
   {
     path: "/login",
@@ -30,6 +36,10 @@ const ROUTE_INDEX_COMPONENT = [
   {
     path: "/signup",
     component: <SignUp />,
+  },
+  {
+    path: "/",
+    component: <PreventLogin></PreventLogin>,
   },
 ];
 
