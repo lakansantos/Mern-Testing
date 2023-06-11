@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
-import { getPosts } from "../../api/post";
+import {useEffect, useState} from "react";
+import {getPosts} from "../../api/post";
 
 const useGetPosts = () => {
-    const [data, setData] = useState([])
-    const [isLoading, setIsloading] = useState(false)
+  const [data, setData] = useState([]);
+  const [isLoading, setIsloading] = useState(false);
 
-    const getData = async () => {
-        try {
-            setIsloading(true)
-            const response = await getPosts()
-            setData(response)
-            setIsloading(false)
-        } catch (error) {
-            console.error('error')
-        }
+  const getData = async () => {
+    try {
+      setIsloading(true);
+      const response = await getPosts();
+      setData(response);
+      setIsloading(false);
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    useEffect(() => {
-        getData()
-    }, [])
+  useEffect(() => {
+    getData();
+  }, []);
 
-    return {
-        data, 
-        isLoading, 
-        reload: getData,
-    }
-}
+  return {
+    data,
+    isLoading,
+    reload: getData,
+  };
+};
 
 export default useGetPosts;

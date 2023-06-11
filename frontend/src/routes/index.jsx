@@ -31,7 +31,11 @@ const ROUTE_INDEX_COMPONENT = [
   },
   {
     path: "/login",
-    component: <Login />,
+    component: (
+      <PreventLogin>
+        <Login />
+      </PreventLogin>
+    ),
   },
   {
     path: "/signup",
