@@ -6,10 +6,18 @@ const { JWT_SECRET } = require("../config/environment");
 const getAllPosts = async (req, res) => {
   try {
     const userId = req.userId;
-    const posts = await Post.find({ userId: userId }).sort({
-      createdAt: "desc",
-    });
+    const { search } = req.query;
 
+    let posts;
+    if (search) {
+      posts = await Post.find({ $text: { $search: search }, userId }).sort({
+        createdAt: "desc",
+      });
+    } else {
+      posts = await Post.find({ userId }).sort({
+        createdAt: "desc",
+      });
+    }
     res.status(200).json(posts);
   } catch (error) {
     res.status(400).json({ mssg: error });
