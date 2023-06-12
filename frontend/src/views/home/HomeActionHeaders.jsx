@@ -20,6 +20,7 @@ export const search = () => {
 
 const HomeActionHeaders = ({setShowAddModal}) => {
   const {handleSearch} = search();
+  const location = useLocation();
   return (
     <>
       <FormGroup>
