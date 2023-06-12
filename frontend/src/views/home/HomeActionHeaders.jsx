@@ -4,13 +4,25 @@ import React from "react";
 import {useLocation} from "react-router-dom";
 import {formSubmit} from "../../utils/form";
 import {useNavigate} from "react-router-dom";
+import {createSearchParams} from "react-router-dom";
+import {INDEX_ROUTE_PATH} from "../../configs/constants";
 
-export const search = () => {
+export const searchPost = () => {
   const navigate = useNavigate();
-  const handleSearch = (data) => {
-    //   const {navigate} = search();
-    console.log(data);
-    navigate(`/views/home?search=${data.search}`);
+
+  const handleSearch = (query) => {
+    const {search} = query;
+
+    if (!!search) {
+      navigate({
+        pathname: INDEX_ROUTE_PATH.home,
+        search: createSearchParams({
+          search: search,
+        }).toString(),
+      });
+    } else {
+      navigate(INDEX_ROUTE_PATH.home);
+    }
   };
   return {
     navigate,
@@ -19,7 +31,7 @@ export const search = () => {
 };
 
 const HomeActionHeaders = ({setShowAddModal}) => {
-  const {handleSearch} = search();
+  const {handleSearch} = searchPost();
   const location = useLocation();
   return (
     <>
