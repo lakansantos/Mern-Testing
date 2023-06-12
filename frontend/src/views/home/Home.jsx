@@ -2,16 +2,13 @@ import useGetPosts from "../posts/useGetPosts";
 import useAddPost from "../posts/useAddPost";
 import PagesTable from "../../components/tables/Table";
 import PostAddModal from "../posts/PostAddModal";
-import {Button} from "reactstrap";
 import useDeletePost from "../posts/useDeletePost";
 import PostDeleteModal from "../posts/PostDeleteModal";
-import {Link} from "react-router-dom";
-import {useLocation} from "react-router-dom";
+
 import useEditPost from "../posts/useEditPost";
 import PostEditModal from "../posts/PostEditModal";
-
+import ActionHeaders from "./HomeActionHeaders";
 const Home = () => {
-  const location = useLocation();
   const {data, isLoading, reload} = useGetPosts();
   const {showAddModal, setShowAddModal, onClose, onAdd} = useAddPost(reload);
 
@@ -34,12 +31,8 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <header>
-        <Link to="/create/post" state={{background: location}}>
-          <Button color="primary" onClick={() => setShowAddModal(true)}>
-            Add Post
-          </Button>
-        </Link>
+      <header className="d-flex justify-content-between">
+        <ActionHeaders setShowAddModal={setShowAddModal} />
       </header>
 
       <PostAddModal

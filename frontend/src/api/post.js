@@ -1,7 +1,7 @@
-import http from "../utils/http";
+import http, {parseSearchToObject} from "../utils/http";
 
-export function getPosts() {
-  return http("GET", "/posts");
+export function getPosts(data) {
+  return http("GET", "/posts", parseSearchToObject(data));
 }
 
 export function getPost(id) {
@@ -17,4 +17,8 @@ export function deletePost(id) {
 
 export function editPost(id, data) {
   return http("PUT", `/posts/${id}`, data);
+}
+
+export function searchPost(query) {
+  return http("GET", "/search", query);
 }

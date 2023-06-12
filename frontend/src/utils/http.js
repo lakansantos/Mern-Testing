@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_URL} from "../configs/environment";
 import {AUTH_COOKIE_NAME} from "../configs/constants";
 import cookies from "./cookies";
+import qs from "qs";
 export const instance = axios.create({
   baseURL: API_URL,
 
@@ -37,6 +38,10 @@ instance.interceptors.response.use(
   }
 );
 
+export function parseSearchToObject(search) {
+  const value = search.substring(1);
+  return qs.parse(value);
+}
 export default async function http(method, url, data) {
   const options = {method, url};
   if (method.toUpperCase() === "GET" || method.toUpperCase() === "DELETE") {
