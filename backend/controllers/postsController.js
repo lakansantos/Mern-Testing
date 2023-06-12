@@ -9,10 +9,13 @@ const getAllPosts = async (req, res) => {
     const { search } = req.query;
 
     let posts;
+    const regexPattern = new RegExp(search, "i");
     if (search) {
-      posts = await Post.find({ $text: { $search: search }, userId }).sort({
-        createdAt: "desc",
-      });
+      posts = await Post.find({ title: { $regex: regexPattern }, userId }).sort(
+        {
+          createdAt: "desc",
+        }
+      );
     } else {
       posts = await Post.find({ userId }).sort({
         createdAt: "desc",
