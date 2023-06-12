@@ -12,13 +12,13 @@ const login = async (req, res) => {
 
     const user = await User.findOne({ userName });
     if (!user) {
-      res.status(404).json({ mssg: "User not found" });
+      return res.status(404).json({ mssg: "User not found" });
     }
 
-    const isValidPassword = bcrypt.compare(password, user.password);
+    const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      res.status(401).json({ mssg: "Invalid Password" });
+      return res.status(401).json({ mssg: "Invalid Password" });
     }
 
     res.status(200).json({
@@ -26,7 +26,7 @@ const login = async (req, res) => {
       token: convertToToken({ id: user._id }),
     });
   } catch (error) {
-    res.status(500).json({ message: "Server does not respond" });
+    return res.status(500).json({ message: "Server does not respond" });
   }
 };
 
