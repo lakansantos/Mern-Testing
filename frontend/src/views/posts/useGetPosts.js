@@ -10,7 +10,6 @@ const useGetPosts = () => {
     try {
       setIsloading(true);
       const response = await getPosts(search);
-      console.log(search);
       setData(response);
       setIsloading(false);
     } catch (error) {
