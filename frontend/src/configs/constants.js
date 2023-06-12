@@ -4,4 +4,10 @@ export const MODAL_ROUTE_PATH = {
   delete_user: "/delete/post/:id",
 };
 
+export const INDEX_ROUTE_PATH = {
+  login: "/login",
+  signup: "/signup",
+  home: "/views/home",
+};
+
 export const AUTH_COOKIE_NAME = "COOKIE_NAME";

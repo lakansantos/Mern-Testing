@@ -9,7 +9,7 @@ const AuthProvider = ({children}) => {
   const [token, setToken] = useState(cookies.get(AUTH_COOKIE_NAME) || "");
 
   const expires = new Date();
-  expires.setDate(expires.getDate() + 7);
+  expires.setDate(expires.getDate() + 1);
   cookies.set(AUTH_COOKIE_NAME, `${token}`, {
     path: "/",
     expires,
