@@ -93,10 +93,23 @@ const deletePost = async (req, res) => {
   }
 };
 
+const searchPost = async (req, res) => {
+  try {
+    const { q } = req.query;
+    const userId = req.userId;
+    const searchResults = await Post.find({ $text: { $search: q }, userId });
+
+    res.status(200).json(searchResults);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   getAllPosts,
   getSinglePost,
   addPost,
   editPost,
   deletePost,
+  searchPost,
 };

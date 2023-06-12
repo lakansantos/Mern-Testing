@@ -7,6 +7,7 @@ const {
   addPost,
   editPost,
   deletePost,
+  searchPost,
 } = require("../controllers/postsController");
 const { authenticateToken } = require("../middlewares/authMiddleWare");
 
@@ -27,5 +28,7 @@ router.post("/posts", authenticateToken, addPost);
 router.put("/posts/:id", authenticateToken, editPost);
 
 router.delete("/posts/:id", authenticateToken, deletePost);
+
+router.get("/search", authenticateToken, searchPost);
 
 module.exports = router;
