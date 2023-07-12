@@ -24,7 +24,8 @@ const useEditPost = (callback) => {
   const getData = async () => {
     setIsLoading(true);
     const response = await getPost(id);
-    setDataToEdit(response);
+    const {data} = response;
+    setDataToEdit(data);
     setIsLoading(false);
   };
 

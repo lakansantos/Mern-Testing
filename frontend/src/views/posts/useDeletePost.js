@@ -16,8 +16,9 @@ const useDeletePost = (callback) => {
   const handleDeleteToggle = async (postId) => {
     setShowDeleteModal(true);
     const response = await getPost(postId);
+    const {data} = response;
     setId(postId);
-    setDataToDelete(response);
+    setDataToDelete(data);
   };
   const deleteData = async () => {
     try {
