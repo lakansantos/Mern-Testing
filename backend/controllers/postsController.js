@@ -6,12 +6,12 @@ const { JWT_SECRET } = require("../config/environment");
 const getAllPosts = async (req, res) => {
   try {
     const userId = req.userId;
-    const { search, limit = 5 } = req.query;
+    const { search, offset = 1, limit = 5 } = req.query;
 
     let posts;
     const regexPattern = new RegExp(search, "i");
 
-    const startIndex = (page - 1) * limit;
+    const startIndex = (offset - 1) * limit;
     const totalRows = await Post.countDocuments({ userId });
 
     if (search) {
@@ -32,7 +32,7 @@ const getAllPosts = async (req, res) => {
     res.status(200).json({
       data: posts,
       meta: {
-        offset: page,
+        offset: offset,
         totalRows: totalRows,
         limit: limit,
       },
