@@ -22,6 +22,16 @@ const ROUTE_MODAL_COMPONENT = [
 
 const ROUTE_INDEX_COMPONENT = [
   {
+    path: "/",
+    component: (
+      <PreventLogin>
+        <Auth>
+          <Home />
+        </Auth>
+      </PreventLogin>
+    ),
+  },
+  {
     path: "/views/home",
     component: (
       <Auth>
@@ -40,10 +50,6 @@ const ROUTE_INDEX_COMPONENT = [
   {
     path: "/signup",
     component: <SignUp />,
-  },
-  {
-    path: "/",
-    component: <PreventLogin></PreventLogin>,
   },
 ];
 
