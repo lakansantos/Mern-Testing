@@ -6,22 +6,37 @@ const { JWT_SECRET } = require("../config/environment");
 const getAllPosts = async (req, res) => {
   try {
     const userId = req.userId;
-    const { search } = req.query;
+    const { search, limit = 5 } = req.query;
 
     let posts;
     const regexPattern = new RegExp(search, "i");
+
+    const startIndex = (page - 1) * limit;
+    const totalRows = await Post.countDocuments({ userId });
+
     if (search) {
-      posts = await Post.find({ title: { $regex: regexPattern }, userId }).sort(
-        {
+      posts = await Post.find({ title: { $regex: regexPattern }, userId })
+        .limit(limit * 1)
+        .skip(startIndex)
+        .sort({
           createdAt: "desc",
-        }
-      );
+        });
     } else {
-      posts = await Post.find({ userId }).sort({
-        createdAt: "desc",
-      });
+      posts = await Post.find({ userId })
+        .limit(limit * 1)
+        .skip(startIndex)
+        .sort({
+          createdAt: "desc",
+        });
     }
-    res.status(200).json(posts);
+    res.status(200).json({
+      data: posts,
+      meta: {
+        offset: page,
+        totalRows: totalRows,
+        limit: limit,
+      },
+    });
   } catch (error) {
     res.status(400).json({ mssg: error });
   }
@@ -39,7 +54,9 @@ const getSinglePost = async (req, res) => {
         mssg: "No posts found",
       });
     } else {
-      res.status(200).json(singlePost);
+      res.status(200).json({
+        data: singlePost,
+      });
     }
   } catch (error) {
     res.status(400).json({ mssg: error.message });
@@ -59,7 +76,7 @@ const addPost = async (req, res) => {
         mssg: "No post found!",
       });
     } else {
-      res.status(200).json(post);
+      res.status(200).json({ data: post });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -110,7 +127,7 @@ const searchPost = async (req, res) => {
     const userId = req.userId;
     const searchResults = await Post.find({ $text: { $search: q }, userId });
 
-    res.status(200).json(searchResults);
+    res.status(200).json({ data: searchResults });
   } catch (error) {
     console.error(error);
   }
