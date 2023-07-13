@@ -29,6 +29,6 @@ router.put("/posts/:id", authenticateToken, editPost);
 
 router.delete("/posts/:id", authenticateToken, deletePost);
 
-router.get("/search", authenticateToken, searchPost);
+// router.get("/search", authenticateToken, searchPost);
 
 module.exports = router;

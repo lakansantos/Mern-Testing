@@ -8,33 +8,32 @@ const getAllPosts = async (req, res) => {
     const userId = req.userId;
     const { search, offset = 1, limit = 5 } = req.query;
 
-    let posts;
     const regexPattern = new RegExp(search, "i");
 
     const startIndex = (offset - 1) * limit;
-    const totalRows = await Post.countDocuments({ userId });
+    // const totalRows = await Post.countDocuments({ userId });
 
-    if (search) {
-      posts = await Post.find({ title: { $regex: regexPattern }, userId })
-        .limit(limit * 1)
+    let query = search
+      ? { title: { $regex: regexPattern }, userId }
+      : { userId };
+
+    const [totalRows, posts] = await Promise.all([
+      Post.countDocuments(query),
+      Post.find(query)
         .skip(startIndex)
-        .sort({
-          createdAt: "desc",
-        });
-    } else {
-      posts = await Post.find({ userId })
-        .limit(limit * 1)
-        .skip(startIndex)
-        .sort({
-          createdAt: "desc",
-        });
-    }
+        .limit(parseInt(limit))
+        .sort({ createdAt: "desc" }),
+    ]);
+
+    const totalPages = Math.ceil(totalRows / limit);
+
     res.status(200).json({
       data: posts,
       meta: {
         offset: offset,
         totalRows: totalRows,
         limit: limit,
+        totalPages,
       },
     });
   } catch (error) {
