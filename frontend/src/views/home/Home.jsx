@@ -8,8 +8,9 @@ import PostDeleteModal from "../posts/PostDeleteModal";
 import useEditPost from "../posts/useEditPost";
 import PostEditModal from "../posts/PostEditModal";
 import ActionHeaders from "./HomeActionHeaders";
+import TablePagination from "../../components/tables/TablePagination";
 const Home = () => {
-  const {data, isLoading, reload} = useGetPosts();
+  const {data, isLoading, reload, meta} = useGetPosts();
   const {showAddModal, setShowAddModal, onClose, onAdd} = useAddPost(reload);
 
   const {
@@ -62,6 +63,8 @@ const Home = () => {
         handleEditToggle={handleEditToggle}
         isLoading={isLoading}
       />
+
+      <TablePagination meta={meta} data={data} />
     </div>
   );
 };
