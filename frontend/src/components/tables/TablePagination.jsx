@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {createSearchParams, useLocation, useNavigate} from "react-router-dom";
 import {Button, Pagination, PaginationItem} from "reactstrap";
 import qs from "qs";
@@ -34,12 +34,18 @@ function TablePagination({meta}) {
     });
   };
 
+  useEffect(() => {
+    if (offset) {
+      setCurrentPage(parseInt(offset));
+    }
+  }, [offset]);
+
   return (
     <Pagination className="pagination-page">
       <PaginationItem className="mx-1">
         <Button
           onClick={() => handlePage(currentPage - 1)}
-          disabled={currentPage === 1}
+          disabled={currentPage === 1 || totalPages <= 1}
         >
           Prev...
         </Button>
@@ -50,11 +56,7 @@ function TablePagination({meta}) {
             <Button
               key={index}
               onClick={() => handlePage(page)}
-              className={
-                page === currentPage || (offset && parseInt(offset) === page)
-                  ? "bg-dark"
-                  : ""
-              }
+              className={offset && parseInt(offset) === page ? "bg-dark" : ""}
             >
               {page}
             </Button>
@@ -64,7 +66,7 @@ function TablePagination({meta}) {
       <PaginationItem className="mx-1">
         <Button
           onClick={() => handlePage(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={currentPage === totalPages || totalPages <= 1}
         >
           Next
         </Button>
