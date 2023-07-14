@@ -5,22 +5,22 @@ import cookies from "../utils/cookies";
 export const AuthContext = createContext({});
 
 const AuthProvider = ({children}) => {
-  const [isAuth, setAuth] = useState(false);
   const [token, setToken] = useState(cookies.get(AUTH_COOKIE_NAME) || "");
-
+  const [isAuth, setAuth] = useState(!!token);
   const expires = new Date();
   expires.setDate(expires.getDate() + 1);
   cookies.set(AUTH_COOKIE_NAME, `${token}`, {
     path: "/",
     expires,
   });
+
   useEffect(() => {
-    const storedToken = cookies.get(AUTH_COOKIE_NAME);
-    if (storedToken) {
-      setToken(storedToken);
+    if (!!token) {
       setAuth(true);
+    } else {
+      setAuth(false);
     }
-  }, []);
+  }, [token]);
 
   return (
     <AuthContext.Provider
