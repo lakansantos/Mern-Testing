@@ -69,7 +69,7 @@ const addPost = async (req, res) => {
 
   try {
     const post = await Post.create({ title, message, userId: req.userId });
-    console.log(req.userId);
+
     if (!post) {
       res.status(400).json({
         mssg: "No post found!",

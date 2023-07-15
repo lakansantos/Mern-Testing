@@ -45,8 +45,12 @@ const getUsers = async (req, res) => {
 };
 
 const changeUserPassword = async (req, res) => {
-  const { currentPassword, newPassword } = req.body;
+  const { currentPassword, newPassword, confirmPassword } = req.body;
 
+  if (newPassword !== confirmPassword)
+    return res
+      .status(400)
+      .json({ mssg: "New and Current password do not match" });
   try {
     const user = await User.findById(req.userId);
 
