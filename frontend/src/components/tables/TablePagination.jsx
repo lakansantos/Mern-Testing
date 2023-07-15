@@ -3,10 +3,8 @@ import {createSearchParams, useLocation, useNavigate} from "react-router-dom";
 import {Button, Pagination, PaginationItem} from "reactstrap";
 import qs from "qs";
 
-function TablePagination({meta}) {
+function TablePagination({meta, limitRows}) {
   const {limit, offset, totalPages, totalRows} = meta;
-
-  const itemsPerPage = limit;
 
   const navigate = useNavigate();
 
@@ -18,9 +16,10 @@ function TablePagination({meta}) {
   const parsedQuery = qs.parse(trimmedQuery);
 
   let pages = [];
-  for (let i = 1; i <= Math.ceil(totalRows / itemsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalRows / limit); i++) {
     pages.push(i);
   }
+
   const handlePage = (page) => {
     setCurrentPage(page);
 
@@ -29,7 +28,7 @@ function TablePagination({meta}) {
       search: createSearchParams({
         ...parsedQuery,
         offset: page,
-        limit: itemsPerPage || 5,
+        limit: limitRows || 5,
       }).toString(),
     });
   };
