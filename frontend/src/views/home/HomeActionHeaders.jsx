@@ -8,8 +8,8 @@ import {createSearchParams} from "react-router-dom";
 import {INDEX_ROUTE_PATH} from "../../configs/constants";
 import {postSearch} from "../posts/postSearch";
 
-const HomeActionHeaders = ({setShowAddModal}) => {
-  const {handleSearch} = postSearch();
+const HomeActionHeaders = ({setShowAddModal, limitRows}) => {
+  const {handleSearch} = postSearch(limitRows);
   const location = useLocation();
   return (
     <>

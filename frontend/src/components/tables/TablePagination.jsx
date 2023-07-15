@@ -46,7 +46,7 @@ function TablePagination({meta, limitRows}) {
           onClick={() => handlePage(currentPage - 1)}
           disabled={currentPage === 1 || totalPages <= 1}
         >
-          Prev...
+          Prev
         </Button>
       </PaginationItem>
       <PaginationItem className="d-flex gap-1">

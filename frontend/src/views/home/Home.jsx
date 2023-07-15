@@ -38,7 +38,10 @@ const Home = () => {
   return (
     <div className="home-page">
       <header className="d-flex justify-content-between">
-        <ActionHeaders setShowAddModal={setShowAddModal} />
+        <ActionHeaders
+          setShowAddModal={setShowAddModal}
+          limitRows={limitRows}
+        />
       </header>
 
       <PostAddModal
