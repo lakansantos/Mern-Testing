@@ -1,11 +1,10 @@
 import {Form, FormGroup, Input, Label, Button, FormFeedback} from "reactstrap";
-import FormContainer from "../../components/forms/FormContainer";
+import {FormContainer, FormSubmit} from "../../components/Forms";
 import {Link} from "react-router-dom";
-import {formSubmit} from "../../utils/form";
 
 const LoginForm = ({onLogin}) => {
   return (
-    <Form className="form" onSubmit={formSubmit(onLogin)} noValidate>
+    <FormSubmit className="form" onSubmit={onLogin} noValidate>
       <FormGroup>
         <h1>Login</h1>
       </FormGroup>
@@ -46,12 +45,7 @@ const LoginForm = ({onLogin}) => {
           </span>
         </p>
       </div>
-      <FormContainer>
-        <Button color="primary" type="submit">
-          Submit
-        </Button>
-      </FormContainer>
-    </Form>
+    </FormSubmit>
   );
 };
 

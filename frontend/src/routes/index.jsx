@@ -5,6 +5,8 @@ import Login from "../views/login";
 import SignUp from "../views/signup";
 import Auth from "../utils/Auth";
 import PreventLogin from "../utils/PreventAccess";
+import UserChangePasswordForm from "../components/Forms/UserSettings/UserChangePasswordForm";
+import ChangePassword from "../views/settings/change_password";
 const ROUTE_MODAL_COMPONENT = [
   {
     path: MODAL_ROUTE_PATH.create_user,
@@ -51,6 +53,14 @@ const ROUTE_INDEX_COMPONENT = [
   {
     path: "/signup",
     component: <SignUp />,
+  },
+  {
+    path: "/settings/change-password",
+    component: (
+      <Auth>
+        <ChangePassword />
+      </Auth>
+    ),
   },
 ];
 
