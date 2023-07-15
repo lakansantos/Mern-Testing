@@ -44,7 +44,30 @@ const getUsers = async (req, res) => {
   }
 };
 
+const changeUserPassword = async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findById(req.userId);
+
+    if (!user) return res.status(404).json({ mssg: "User not found" });
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+
+    if (!isMatch)
+      return res.status(400).json({ mssg: "Invalid current password" });
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await User.findByIdAndUpdate(req.userId, { password: hashedPassword });
+
+    res.status(200).json({ mssg: "Password changed successfully" });
+  } catch (error) {
+    res.status(500).json({ mssg: "Something went wrong" });
+  }
+};
 module.exports = {
   registerUser,
   getUsers,
+  changeUserPassword,
 };
