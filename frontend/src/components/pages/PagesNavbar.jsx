@@ -29,14 +29,16 @@ const PagesNavbar = () => {
               </div>
               {isOpen && (
                 <div className="settings-menu">
-                  <div className="settings-container">
-                    <Link
-                      to={"/settings/change-password"}
-                      style={{textDecoration: "none", color: "black"}}
-                    >
-                      Change password
-                    </Link>
-                  </div>
+                  <Link
+                    to={"/settings/change-password"}
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      width: "100%",
+                    }}
+                  >
+                    <div className="settings-container">Change password</div>
+                  </Link>
                   <Logout />
                 </div>
               )}
