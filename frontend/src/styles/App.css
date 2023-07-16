@@ -84,3 +84,35 @@ header {
 .input-box {
   width: 100%;
 }
+
+.img-avatar:hover {
+  cursor: pointer;
+}
+
+.settings-wrapper {
+  position: relative;
+}
+.settings-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: white;
+  min-height: 120px;
+  height: fit-content;
+  left: -300%;
+  width: 200px;
+}
+
+.logout-container,
+.settings-container {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+.logout-container:hover,
+.settings-container:hover {
+  cursor: pointer;
+  background-color: rgb(219, 216, 216);
+}

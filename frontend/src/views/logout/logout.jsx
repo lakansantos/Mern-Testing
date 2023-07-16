@@ -9,9 +9,9 @@ const Logout = () => {
   };
 
   return (
-    <Button onClick={handleLogout} color="primary">
+    <div onClick={handleLogout} color="primary" className="logout-container">
       Logout
-    </Button>
+    </div>
   );
 };
 

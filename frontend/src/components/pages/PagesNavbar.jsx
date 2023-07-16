@@ -1,13 +1,17 @@
+import {Link, useLocation} from "react-router-dom";
+import {useState} from "react";
+
 import Logout from "../../views/logout/logout";
 import {useAuthContext} from "../../context/AuthContext";
 import Signup from "../../views/signup/SignupButton";
-import {useLocation} from "react-router-dom";
 import {INDEX_ROUTE_PATH} from "../../configs/constants";
 import Login from "../../views/login/LoginButton";
-const PagesNavbar = () => {
-  const {token} = useAuthContext();
-  const location = useLocation();
+import avatar from "../../assets/icons/avatar.png";
 
+const PagesNavbar = () => {
+  const {isAuth} = useAuthContext();
+  const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <nav className="bg-primary">
       <ul className="d-flex justify-content-between w-100 mx-3">
@@ -15,8 +19,28 @@ const PagesNavbar = () => {
           <a href="/views/home">Home</a>
         </li>
         <li>
-          {token ? (
-            <Logout />
+          {isAuth ? (
+            <div
+              className="settings-wrapper"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <div>
+                <img src={avatar} alt="user-settings" className="img-avatar" />
+              </div>
+              {isOpen && (
+                <div className="settings-menu">
+                  <div className="settings-container">
+                    <Link
+                      to={"/settings/change-password"}
+                      style={{textDecoration: "none", color: "black"}}
+                    >
+                      Change password
+                    </Link>
+                  </div>
+                  <Logout />
+                </div>
+              )}
+            </div>
           ) : location.pathname === INDEX_ROUTE_PATH.signup ? (
             <Login />
           ) : (
