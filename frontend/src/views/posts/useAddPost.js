@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 // import { instance } from "../../api/axios";
 import {addPost as createPost} from "../../api/post";
 import {useNavigate} from "react-router-dom";
+import {errorPop, successPop} from "../../components/Toast/Toast";
 
 const useAddPost = (callback) => {
   const navigate = useNavigate();
@@ -15,9 +16,10 @@ const useAddPost = (callback) => {
     try {
       await createPost(data);
       onClose();
-
+      successPop("Added post successfully");
       if (callback) callback();
     } catch (error) {
+      errorPop(error);
       console.error("error");
     }
   };

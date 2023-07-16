@@ -1,5 +1,6 @@
 import {login} from "../../api/auth";
 import {useAuthContext} from "../../context/AuthContext";
+import {errorPop, successPop} from "../../components/Toast/Toast";
 
 export const useLogin = () => {
   const {setAuth, setToken} = useAuthContext();
@@ -10,7 +11,12 @@ export const useLogin = () => {
       const {token} = response;
       setAuth(true);
       setToken(token);
+      successPop("Logged in successfully");
     } catch (error) {
+      const {response} = error;
+      const {data} = response;
+      const {mssg} = data;
+      errorPop(mssg);
       console.error(error);
     }
   };

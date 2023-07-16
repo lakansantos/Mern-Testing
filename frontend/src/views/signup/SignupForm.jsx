@@ -1,5 +1,5 @@
 import {Form, FormGroup, Input, Label, Button, FormFeedback} from "reactstrap";
-import FormContainer from "../../components/forms/FormContainer";
+import FormContainer from "../../components/Forms/FormContainer";
 import {formSubmit} from "../../utils/form";
 const SignupForm = ({onSubmit}) => {
   return (

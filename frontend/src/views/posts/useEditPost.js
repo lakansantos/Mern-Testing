@@ -2,6 +2,7 @@ import {useState} from "react";
 import {editPost, getPost} from "../../api/post";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import {errorPop, successPop} from "../../components/Toast/Toast";
 
 const useEditPost = (callback) => {
   const [showEditModal, setShowEditModal] = useState(false);
@@ -34,10 +35,12 @@ const useEditPost = (callback) => {
       await editPost(id, data);
       setShowEditModal(false);
       setData(data);
+      successPop("Updated post successfully");
       navigate(-1);
       if (callback) callback();
     } catch (error) {
       console.error(error);
+      errorPop(error);
     }
   };
   useEffect(() => {

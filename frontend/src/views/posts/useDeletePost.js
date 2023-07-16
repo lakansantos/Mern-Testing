@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {deletePost, getPost} from "../../api/post";
 import {useNavigate} from "react-router-dom";
+import {errorPop, successPop} from "../../components/Toast/Toast";
 
 const useDeletePost = (callback) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -24,9 +25,11 @@ const useDeletePost = (callback) => {
     try {
       const response = await deletePost(id);
       toggleDelete();
+      successPop("Deleted the post successfully");
 
       if (callback) callback();
     } catch (error) {
+      errorPop("Something went wrong");
       console.error(error);
     }
   };
