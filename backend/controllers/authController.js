@@ -7,7 +7,6 @@ const convertToToken = (data) => {
   return jwt.sign(data, JWT_SECRET);
 };
 const login = async (req, res) => {
-  console.log("test");
   try {
     const { userName, password } = req.body;
 
